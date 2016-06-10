@@ -95,10 +95,11 @@
 
 - (NSArray *)allItemsWithMinimumPriceInCents:(NSUInteger)minPrice; {
     
-    // I will revisit this method as well as the last one to implement NSPredicate instead of the loops. This was how my brain naturally problem solved this particular method.
+    NSPredicate *minPricePredicate = [NSPredicate predicateWithFormat:@"priceInCents >= %lu", minPrice];
+    NSArray *minPriceArray = [self.items filteredArrayUsingPredicate:minPricePredicate];
     
-    NSMutableArray *itemsWithMinimumPrice = [[NSMutableArray alloc] init];
-    
+   // NSMutableArray *itemsWithMinimumPrice = [[NSMutableArray alloc] init];
+   /*
     for (NSUInteger i = 0; i < [self.items count]; i++) {
         
         FISItem *item = self.items[i];
@@ -110,13 +111,17 @@
         }
         
     }
-    
-    return itemsWithMinimumPrice;
+    */
+    return minPriceArray;
     
 }
 
 -(NSArray *)allItemsWithMaximumPriceInCents:(NSUInteger)maxPrice; {
     
+    NSPredicate *maxPricePredicate = [NSPredicate predicateWithFormat:@"priceInCents <= %lu", maxPrice];
+    NSArray *maxPriceArray = [self.items filteredArrayUsingPredicate:maxPricePredicate];
+    
+   /*
     NSMutableArray *itemsWithMaximumPrice = [[NSMutableArray alloc] init];
     
     for (NSUInteger i = 0; i < [self.items count]; i++) {
@@ -130,8 +135,8 @@
         }
         
     }
-    
-    return itemsWithMaximumPrice;
+    */
+    return maxPriceArray;
     
 }
 
